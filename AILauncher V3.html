@@ -3190,12 +3190,6 @@
     setTimeout(() => { frame.src = 'about:blank'; }, 220);
   }
 
-  document.querySelector('.portal-panel').addEventListener('mouseenter', () => {
-    if (overlay.classList.contains('open') && document.activeElement !== frame) {
-      frame.focus();
-    }
-  });
-
   closeBtn.addEventListener('click', closePortal);
   overlay.addEventListener('click', (e) => {
     if(e.target === overlay) closePortal();
