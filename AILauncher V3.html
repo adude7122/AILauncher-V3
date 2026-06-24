@@ -455,6 +455,7 @@
       class="portal-frame" 
       id="portalFrame" 
       src="" 
+      tabindex="0"
       allowfullscreen 
       allow="pointer-lock *; keyboard-map; clipboard-read; clipboard-write">
     </iframe>
@@ -3170,17 +3171,21 @@
     portalTitle.textContent = game.title;
     frame.src = game.url;
     overlay.classList.add('open');
-
-    // FORCE the browser's cursor/keyboard focus inside the frame 250ms after it mounts
     setTimeout(() => {
       frame.focus();
-    }, 250);
+    }, 200);
   }
 
   function closePortal(){
     overlay.classList.remove('open');
     setTimeout(() => { frame.src = 'about:blank'; }, 220);
   }
+
+  document.querySelector('.portal-panel').addEventListener('mouseenter', () => {
+    if (overlay.classList.contains('open') && document.activeElement !== frame) {
+      frame.focus();
+    }
+  });
 
   closeBtn.addEventListener('click', closePortal);
   overlay.addEventListener('click', (e) => {
