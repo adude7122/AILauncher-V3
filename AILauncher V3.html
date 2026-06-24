@@ -322,15 +322,16 @@
   }
 
   /* Portal viewer */
-  .portal-overlay{
-    position:fixed;
-    inset:0;
-    z-index:50;
-    display:none;
-    opacity:0;
-    background:rgba(6,8,14,0.94);
-    backdrop-filter:blur(6px);
-    transition:opacity 220ms ease;
+  .portal-panel {
+    margin:auto;
+    width:min(1200px, 94vw);
+    height:min(800px, 88vh);
+    background:#000;
+    border:1px solid var(--line);
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
   }
 
   .portal-overlay.open {
@@ -3171,6 +3172,10 @@
     portalTitle.textContent = game.title;
     frame.src = game.url;
     overlay.classList.add('open');
+    
+    // FIX: Freeze background scrolling so iframe coordinates never shift
+    document.body.style.overflow = 'hidden';
+
     setTimeout(() => {
       frame.focus();
     }, 200);
@@ -3178,6 +3183,10 @@
 
   function closePortal(){
     overlay.classList.remove('open');
+    
+    // FIX: Restore background scrolling when you close the game
+    document.body.style.overflow = '';
+
     setTimeout(() => { frame.src = 'about:blank'; }, 220);
   }
 
