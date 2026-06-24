@@ -333,9 +333,10 @@
     transition:opacity 220ms ease;
   }
 
-  .portal-overlay.open{
+  .portal-overlay.open {
     display:flex;
     opacity:1;
+    pointer-events: auto;
   }
 
   .portal-panel{
@@ -391,12 +392,13 @@
 .action-btn:hover { border-color: var(--accent-2); color: var(--accent-2); }
 .danger-btn:hover { border-color: var(--danger); color: var(--danger); }
 
-  iframe.portal-frame{
+  iframe.portal-frame {
     width:100%;
     height:100%;
     border:none;
     background:#000;
     flex:1;
+    pointer-events: auto !important; /* Forces the game canvas to intercept all mouse paths */
   }
 
   footer{
@@ -450,12 +452,11 @@
     </div>
     
     <iframe 
-        class="portal-frame" 
-        id="portalFrame" 
-        src="" 
-        allowfullscreen 
-        sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-downloads" 
-        allow="pointer-lock; keyboard-map; clipboard-read; clipboard-write">
+      class="portal-frame" 
+      id="portalFrame" 
+      src="" 
+      allowfullscreen 
+      allow="pointer-lock *; keyboard-map; clipboard-read; clipboard-write">
     </iframe>
 
   </div>
